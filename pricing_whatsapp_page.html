@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodMod - حلول المتاجر الإلكترونية الاحترافية</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap');
+        
+        :root {
+            --primary-color: #00d4ff;
+            --secondary-color: #6c5ce7;
+            --dark-bg: #0a0e27;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --text-light: #e0e0e0;
+            --text-white: #ffffff;
+            --accent-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1419 100%);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: rgba(10, 14, 39, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 0;
+            box-shadow: 0 2px 20px rgba(0, 212, 255, 0.1);
+        }
+        
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #00d4ff, #6c5ce7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-link {
+            color: var(--text-light) !important;
+            font-weight: 500;
+            margin: 0 1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding: 100px 0;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.15), transparent);
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(108, 92, 231, 0.15), transparent);
+            bottom: -150px;
+            left: -150px;
+            border-radius: 50%;
+            animation: float 8s ease-in-out infinite reverse;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+        
+        .hero-content {
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            animation: fadeInUp 1.2s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .hero-image {
+            animation: fadeInRight 1.5s ease;
+            filter: drop-shadow(0 0 50px rgba(0, 212, 255, 0.3));
+        }
+        
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        /* Buttons */
+        .btn-primary-custom {
+            background: linear-gradient(135deg, #00d4ff, #0099cc);
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(0, 212, 255, 0.4);
+            margin: 0.5rem;
+        }
+        
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 35px rgba(0, 212, 255, 0.6);
+        }
+        
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 25px rgba(37, 211, 102, 0.4);
+            margin: 0.5rem;
+        }
+        
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 35px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        
+        /* Section Titles */
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, #fff, #00d4ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-light);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* Pricing Cards */
+        .pricing-section {
+            padding: 100px 0;
+            position: relative;
+        }
+        
+        .pricing-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+        }
+        
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #00d4ff, #6c5ce7);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.2);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+        
+        .pricing-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .pricing-card.featured {
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 10px 40px rgba(0, 212, 255, 0.3);
+        }
+        
+        .pricing-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(135deg, #00d4ff, #6c5ce7);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .pricing-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+        
+        .pricing-price {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+        
+        .pricing-duration {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 2rem 0;
+        }
+        
+        .pricing-features li {
+            padding: 0.8rem 0;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .pricing-features li i {
+            color: #25D366;
+            margin-left: 10px;
+        }
+        
+        /* Why Choose Us */
+        .why-section {
+            padding: 100px 0;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 2.5rem;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            margin-bottom: 2rem;
+            height: 100%;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 50px rgba(108, 92, 231, 0.2);
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+        
+        .feature-icon {
+            font-size: 3.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-white);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-text {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .contact-box {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 4rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        /* Footer */
+        .footer {
+            background: rgba(10, 14, 39, 0.95);
+            padding: 2rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer-text {
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        /* Modal */
+        .modal-content {
+            background: linear-gradient(135deg, #1a1f3a 0%, #0f1419 100%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            border-radius: 20px;
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .modal-title {
+            color: var(--primary-color);
+        }
+        
+        .btn-close {
+            filter: invert(1);
+        }
+        
+        .contact-info {
+            padding: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 1.5rem;
+            background: var(--card-bg);
+            border-radius: 15px;
+            margin-bottom: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.2);
+        }
+        
+        .contact-item i {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-left: 1.5rem;
+        }
+        
+        .contact-item-content h5 {
+            color: var(--text-white);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-item-content p {
+            color: var(--text-light);
+            margin: 0;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .navbar-brand {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-card {
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <i class="bi bi-code-slash"></i> CodMod
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">الباقات</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#why-us">لماذا نحن</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">تواصل</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 hero-content">
+                    <h1 class="hero-title">متجرك الإلكتروني بلمسة احترافية</h1>
+                    <p class="hero-subtitle">
+                        نقدم لك حلولاً متكاملة لإنشاء متجرك الإلكتروني باحترافية عالية، مع تصاميم عصرية وتجربة مستخدم استثنائية تضمن نجاح مشروعك الرقمي.
+                    </p>
+                    <div>
+                        <a href="#pricing" class="btn btn-primary-custom">
+                            <i class="bi bi-cart-check"></i> استكشف الباقات
+                        </a>
+                        <button class="btn btn-whatsapp" onclick="openWhatsApp('مرحباً، أود الاستفسار عن خدماتكم')">
+                            <i class="bi bi-whatsapp"></i> تواصل معنا
+                        </button>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <i class="bi bi-laptop" style="font-size: 20rem; color: rgba(0, 212, 255, 0.3);"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <h2 class="section-title">باقاتنا الاحترافية</h2>
+            <p class="section-subtitle">اختر الباقة المناسبة لاحتياجاتك وابدأ رحلة النجاح الرقمي</p>
+            
+            <div class="row">
+                <!-- Portfolio Package -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-icon">
+                            <i class="bi bi-briefcase"></i>
+                        </div>
+                        <h3 class="pricing-title">portfolio</h3>
+                        <div class="pricing-price">ابتداءً من 4900 دج</div>
+                        <div class="pricing-duration">مدة التسليم: 3 أيام</div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> تصميم عصري وأنيق</li>
+                            <li><i class="bi bi-check-circle-fill"></i> عرض أعمالك باحترافية</li>
+                            <li><i class="bi bi-check-circle-fill"></i> متجاوب مع جميع الأجهزة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> سهولة في التصفح</li>
+                        </ul>
+                        <button class="btn btn-primary-custom w-100" onclick="openWhatsApp('أرغب بطلب باقة بورتفوليو')">
+                            <i class="bi bi-cart-plus"></i> اطلب الآن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Basic Store Package -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-icon">
+                            <i class="bi bi-shop"></i>
+                        </div>
+                        <h3 class="pricing-title">Basic Store</h3>
+                        <div class="pricing-price">ابتداءً من 4900 دج</div>
+                        <div class="pricing-duration">مدة التسليم: يوم واحد</div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> متجر إلكتروني أساسي</li>
+                            <li><i class="bi bi-check-circle-fill"></i> إدارة المنتجات بسهولة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> نظام دفع آمن</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تسليم سريع</li>
+                        </ul>
+                        <button class="btn btn-primary-custom w-100" onclick="openWhatsApp('أرغب بطلب باقة Basic Store')">
+                            <i class="bi bi-cart-plus"></i> اطلب الآن
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Standard Store Package -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card featured">
+                        <span class="pricing-badge">الأكثر طلباً</span>
+                        <div class="pricing-icon">
+                            <i class="bi bi-bag-check"></i>
+                        </div>
+                        <h3 class="pricing-title">Standard Store</h3>
+                        <div class="pricing-price">ابتداءً من 9900 دج</div>
+                        <div class="pricing-duration">مدة التسليم: 3 أيام</div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> متجر متكامل ومتطور</li>
+                            <li><i class="bi bi-check-circle-fill"></i> لوحة تحكم متقدمة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تكامل مع وسائل الدفع</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تحسين محركات البحث</li>
+                        </ul>
+                        <button class="btn btn-whatsapp w-100" onclick="openWhatsApp('أرغب بطلب باقة Standard Store')">
+                            <i class="bi bi-whatsapp"></i> اطلب عبر واتساب
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Premium Store Package -->
+                <div class="col-lg-3 col-md-6">
+                    <div class="pricing-card">
+                        <div class="pricing-icon">
+                            <i class="bi bi-gem"></i>
+                        </div>
+                        <h3 class="pricing-title">Premium Store</h3>
+                        <div class="pricing-price">ابتداءً من 15000 دج</div>
+                        <div class="pricing-duration">مدة التسليم: 7 أيام - شهر</div>
+                        <ul class="pricing-features">
+                            <li><i class="bi bi-check-circle-fill"></i> متجر متقدم بكل الميزات</li>
+                            <li><i class="bi bi-check-circle-fill"></i> تصميم مخصص فريد</li>
+                            <li><i class="bi bi-check-circle-fill"></i> ميزات إضافية متقدمة</li>
+                            <li><i class="bi bi-check-circle-fill"></i> دعم فني مستمر</li>
+                        </ul>
+                        <button class="btn btn-primary-custom w-100" onclick="openWhatsApp('أرغب بطلب باقة Premium Store')">
+                            <i class="bi bi-cart-plus"></i> اطلب الآن
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="why-section" id="why-us">
+        <div class="container">
+            <h2 class="section-title">لماذا تختار CodMod؟</h2>
+            <p class="section-subtitle">نقدم لك تجربة استثنائية تضمن نجاح متجرك الإلكتروني</p>
+            
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-lightning-charge"></i>
+                        </div>
+                        <h4 class="feature-title">سرعة في التنفيذ</h4>
+                        <p class="feature-text">نلتزم بتسليم مشروعك في الوقت المحدد مع الحفاظ على أعلى معايير الجودة والاحترافية.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-palette"></i>
+                        </div>
+                        <h4 class="feature-title">تصاميم عصرية</h4>
+                        <p class="feature-text">نستخدم أحدث اتجاهات التصميم لنمنحك متجراً جذاباً يترك انطباعاً قوياً لدى عملائك.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-shield-check"></i>
+                        </div>
+                        <h4 class="feature-title">أمان وموثوقية</h4>
+                        <p class="feature-text">نضمن حماية بيانات متجرك وعملائك بأعلى معايير الأمان والحماية الرقمية.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-phone"></i>
+                        </div>
+                        <h4 class="feature-title">متجاوب تماماً</h4>
+                        <p class="feature-text">متجرك سيعمل بكفاءة على جميع الأجهزة من الهواتف الذكية إلى أجهزة الكمبيوتر المكتبية.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <h4 class="feature-title">دعم فني متميز</h4>
+                        <p class="feature-text">فريقنا متاح دائماً لمساعدتك والإجابة على استفساراتك وحل أي مشكلة قد تواجهك.</p>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="bi bi-graph-up-arrow"></i>
+                        </div>
+                        <h4 class="feature-title">تحسين محركات البحث</h4>
+                        <p class="feature-text">نهتم بتحسين ظهور متجرك في نتائج البحث لزيادة عدد زوارك وعملائك المحتملين.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="contact-box">
+                <h2 class="section-title">هل أنت مستعد للبدء؟</h2>
+                <p class="section-subtitle">تواصل معنا الآن واحصل على استشارة مجانية لمشروعك</p>
+                <button class="btn btn-whatsapp btn-lg" onclick="openWhatsApp('مرحباً، أود الحصول على استشارة مجانية')">
+                    <i class="bi bi-whatsapp"></i> تواصل عبر واتساب
+                </button>
+                <button class="btn btn-primary-custom btn-lg" data-bs-toggle="modal" data-bs-target="#contactModal">
+                    <i class="bi bi-envelope"></i> معلومات التواصل
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p class="footer-text">
+                © <span id="year"></span> CodMod - جميع الحقوق محفوظة
+            </p>
+        </div>
+    </footer>
+
+<!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="contactModalLabel">معلومات التواصل</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="bi bi-whatsapp"></i>
+                            <div class="contact-item-content">
+                                <h5>واتساب</h5>
+                                <p id="whatsapp-display"></p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-envelope"></i>
+                            <div class="contact-item-content">
+                                <h5>البريد الإلكتروني</h5>
+                                <p>info@codmod.com</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-whatsapp" onclick="openWhatsApp('مرحباً، أود التواصل معكم')">
+                        <i class="bi bi-whatsapp"></i> راسلنا الآن
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // رقم واتساب - يمكن تغييره بسهولة من هنا
+        const WHATSAPP_NUMBER = '213123456789'; // غير هذا الرقم لرقمك
+        
+        // فتح محادثة واتساب مع رسالة محددة
+        function openWhatsApp(message) {
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappURL = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+            window.open(whatsappURL, '_blank');
+        }
+        
+        // عرض رقم الواتساب في Modal
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappDisplay = document.getElementById('whatsapp-display');
+            if (whatsappDisplay) {
+                // تنسيق الرقم لعرضه بشكل جميل
+                const formattedNumber = '+' + WHATSAPP_NUMBER;
+                whatsappDisplay.textContent = formattedNumber;
+            }
+        });
+        
+        // عرض السنة الحالية في الفوتر تلقائياً
+        document.getElementById('year').textContent = new Date().getFullYear();
+        
+        // Smooth scrolling للروابط
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // إغلاق القائمة على الموبايل بعد النقر
+                    const navbarCollapse = document.querySelector('.navbar-collapse');
+                    if (navbarCollapse.classList.contains('show')) {
+                        navbarCollapse.classList.remove('show');
+                    }
+                }
+            });
+        });
+        
+        // تأثير الشفافية للنافبار عند التمرير
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(10, 14, 39, 0.98)';
+            } else {
+                navbar.style.background = 'rgba(10, 14, 39, 0.95)';
+            }
+        });
+        
+        // تأثير الظهور التدريجي للعناصر عند التمرير
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // مراقبة العناصر للتأثير
+        document.querySelectorAll('.pricing-card, .feature-box').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
